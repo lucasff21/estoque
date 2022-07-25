@@ -1,35 +1,27 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cadastrar') }}
+            {{ __('Editar') }}
         </h2>
     </x-slot>
 
-    <div class="row">
-        <div class="col-md-8"></div>
-        <div class="col-md-2">
-            <a href="/home"><button type="button" class="btn btn-outline-secondary btn-space">VOLTAR</button></a>
-        </div>
-        <div class="col-md-2"> </div>
-    </div>
-    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="{{route('criar_item')}}" class="row g-3">
+                    <form method="POST" action="{{route('editar_item' , ['id' => $item->id])}}" class="row g-3">
                         @csrf
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome do Item</label>
-                            <input type="text" class="form-control" id="nome" name="nome">
+                            <input type="text" class="form-control" id="nome" name="nome" value="{{$item->nome}}">
                         </div>
                         <div class="col-md-6">
                             <label for="descricao" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" id="descricao" name="descricao">
+                            <input type="text" class="form-control" id="descricao" name="descricao" value="{{$item->descricao}}">
                         </div>
                         <div class="col-4">
                             <label for="categoria" class="form-label">Categoria</label>
-                            <select id="categoria" name="categoria" class="form-control">
+                            <select id="categoria" name="categoria" class="form-control" value="{{$item->categoria}}">
                                 <option>Alimento</option>
                                 <option>Plastico</option>
                                 <option>Vidro</option>
@@ -41,20 +33,20 @@
                         <div class="row g-2">
                             <div class="col-md-3">
                                 <label for="quantidade" class="form-label">Quantidade:</label>
-                                <input type="number" class="form-control" id="quantidade" name="quantidade">
+                                <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{$item->quantidade}}">
                             </div>
                             <div class="col-md-3">
                                 <label for="estoque_min" class="form-label">Estoque Minimo:</label>
-                                <input type="number" class="form-control" id="estoque_min" name="estoque_min">
+                                <input type="number" class="form-control" id="estoque_min" name="estoque_min" value="{{$item->estoque_min}}">
                             </div>
                             <div class="col-md-3">
                                 <label for="estoque_max" class="form-label">Estoque Maximo:</label>
-                                <input type="number" class="form-control" id="estoque_max" name="estoque_max">
+                                <input type="number" class="form-control" id="estoque_max" name="estoque_max" value="{{$item->estoque_max}}">
                             </div>
                         </div>
 
-                        <div class="">
-                            <button type="submit" class="btn btn-outline-primary">Enviar</button>
+                        <div >
+                            <button type="submit" class="btn btn-outline-primary">Atualizar</button>
                         </div>
                     </form>
                 </div>

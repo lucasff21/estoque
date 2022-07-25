@@ -1,10 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Pagina Principal') }}
         </h2>
     </x-slot>
 
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+            <a href="/cadastrar"><button type="button" class="btn btn-outline-secondary btn-space">ADICIONAR ITEM</button></a>
+        </div>
+        <div class="col-md-2"> </div>
+    </div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -31,6 +39,17 @@
                                     <td>{{ $item->quantidade }}</td>
                                     <td>{{ $item->estoque_min }}</td>
                                     <td>{{ $item->estoque_max }}</td>
+                                    <td><a href="/home/item/{{ $item->id }}"><button type="button"
+                                        class="btn btn-outline-primary">Visualizar</button></a></td>
+                                        
+                                    <td><a href="/editar/{{ $item->id }}"><button type="button"
+                                                class="btn btn-outline-warning">Atualizar</button></a></td>
+                                                
+                                    <form method="POST" action="/home/{{$item->id}}" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <td> <button type="submit" class="btn btn-outline-danger">Deletar</button></td>
+                                    </form>
                                 </tr>
                             @endforeach
                         </tbody>

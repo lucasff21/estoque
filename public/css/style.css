@@ -35,3 +35,9 @@
     background-size: cover;
     background-position: center;
 }
+
+
+.btn-space{
+    float: right;
+    margin-right: 5%;
+}

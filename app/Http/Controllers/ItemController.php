@@ -48,7 +48,7 @@ class ItemController extends Controller
 
         $item->save();
 
-        return redirect('/dashboard');
+        return redirect('/home');
     }
 
     /**
@@ -59,7 +59,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        return view ('visualizarItem', ['item' => $item]);
     }
 
     /**
@@ -70,7 +71,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        return view ('editItem', ['item' => $item]);
     }
 
     /**
@@ -82,7 +84,18 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::findOrFail($id); 
+
+        $item->update([
+            'nome' => $request->nome, 
+            'descricao' => $request->descricao,
+            'categoria' => $request->categoria,
+            'quantidade' => $request->quantidade,
+            'estoque_min' => $request->estoque_min,
+            'estoque_max' => $request->estoque_max,
+        ]);
+
+        return redirect('/home')->with('msg' , 'Item Atualizado!'); 
     }
 
     /**
@@ -93,6 +106,8 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item->delete();
+        return redirect('/home')->with('msg' , 'Item Deletado!');
     }
 }
