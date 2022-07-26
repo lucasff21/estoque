@@ -1,6 +1,7 @@
 Quando eu clonei o projeto, precisei instalar o breeze novamente.
 Então com a nova instalação eu perderei minhas rotas, por isso deixarei elas salvar na minha branch Master.
 Devido a problemas de atualização com o vite, após a instalação do mesmo faça o seguinte passo-a-passo:
+
         remova a seguinte linha de "vite.config.js":
             'resources/css/app.css',
 
