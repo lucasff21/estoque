@@ -32,3 +32,10 @@ Route::get('/editar/{id}', [ItemController::class, 'edit']);
 Route::post('/editar/{id}', [ItemController::class, 'update'])->name('editar_item');
 
 Route::delete('/home/{id}', [ItemController::class, 'destroy'])->name('delete_item');
+
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+});

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->constrained('users');
             $table->string('nome');
             $table->string('descricao');
             $table->string('categoria');

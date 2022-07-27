@@ -12,6 +12,7 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $items = Item::all();
@@ -45,6 +46,9 @@ class ItemController extends Controller
         $item->quantidade = $request->quantidade;
         $item->estoque_min = $request->estoque_min;
         $item->estoque_max = $request->estoque_max;
+
+        $user = auth()->user();
+        $item->user_id = $user->id;
 
         $item->save();
 
