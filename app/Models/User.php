@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Item;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => $value == 1 ? 'Yes' : 'No',
+            set: fn ($value) => $value == 'Yes' ? '1' : '0',
+
+        );
+    }
+
 
     public function items(){
         return $this->hasMany(Item::class);

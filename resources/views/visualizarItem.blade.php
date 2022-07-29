@@ -26,7 +26,7 @@
                                 <th scope="col">Categoria</th>
                                 <th scope="col">Quantidade</th>
                                 <th scope="col">Estoque Minimo</th>
-                                <th scope="col">Estoque Máximo</th>
+                                <th scope="col">Estoque Máximo</th>                 
                             </tr>
                         </thead>
                         <tbody>
@@ -37,11 +37,11 @@
                                 <td>{{ $item->categoria }}</td>
                                 <td>{{ $item->quantidade }}</td>
                                 <td>{{ $item->estoque_min }}</td>
-                                <td>{{ $item->estoque_max }}</td>
+                                <td>{{ $item->estoque_max }}</td>                           
                             </tr>
-
                         </tbody>
                     </table>
+                    <img scr="{{asset("img/items/{$item->image}") }}" alt="{{ $item->image }}" style="max-width: 100px"> 
                 </div>
             </div>
         </div>

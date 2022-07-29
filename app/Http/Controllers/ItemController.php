@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\Gate;
 
 class ItemController extends Controller
 {
@@ -27,6 +28,10 @@ class ItemController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('manage-tasks')) {
+            abort(403, 'Accesso Negado');
+        }
+
         return view ('criarItem');
     }
 
@@ -47,6 +52,19 @@ class ItemController extends Controller
         $item->estoque_min = $request->estoque_min;
         $item->estoque_max = $request->estoque_max;
 
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $requestImage = $request->image;
+            
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/items'), $imageName);
+
+            $item->image = $imageName;
+
+        }
+
         $user = auth()->user();
         $item->user_id = $user->id;
 
@@ -63,6 +81,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
+
         $item = Item::findOrFail($id);
         return view ('visualizarItem', ['item' => $item]);
     }
@@ -75,6 +94,10 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('manage-tasks')) {
+            abort(403, 'Accesso Negado');
+        }
+        
         $item = Item::findOrFail($id);
         return view ('editItem', ['item' => $item]);
     }
